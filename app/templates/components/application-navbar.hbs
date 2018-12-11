@@ -1,0 +1,11 @@
+<nav class="navbar navbar-expand-sm bg-light">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+    {{#if currentUser.sessionValid}}
+        Logged in as {{currentUser.name}}  | <a href="#" {{action 'logout'}} class="text-right">Logout</a>
+    {{else}}
+       {{#link-to "login" class="nav-link"}}Login{{/link-to}} | {{#link-to "sign-up" class="nav-link"}}Register{{/link-to}}
+     {{/if}}
+    </li>
+  </ul>
+</nav>

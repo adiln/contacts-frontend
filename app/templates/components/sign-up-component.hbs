@@ -1,0 +1,39 @@
+{{#each flashMessages.queue as |flash|}}
+  {{flash-message flash=flash}}
+{{/each}}
+<form {{action "signup" on="submit"}}>
+  <div class="form-group">
+    <label for="first_name" class="col-form-label">First Name</label>
+    {{input id="firstName" class="form-control is-valid" type="text" value=firstName required='required'}}
+  </div>
+  <div class="form-group">
+    <label for="last_name" class="col-form-label">Last Name</label>
+    {{input id="lastName" class="form-control is-valid" type="text" value=lastName required='required'}}
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    {{input id="email" type="email" class="form-control is-valid" value=email aria-describedby="emailHelp" required='required'
+    }}
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    {{input id="password" class="form-control is-valid" type="password" value=password required='required'}}
+  </div>
+  <div class="form-group">
+  <label for="confirm_password">Confirm Password</label>
+    {{input id="confirm_password" class="form-control is-valid" type="password" value=confirm_password required='required'}}
+  </div>
+  <div class="form-group">
+    <label for="aadhaar">Aadhaar</label>
+    {{input id="aadhaar" class="form-control is-valid" type="text" value=aadhaar required='required'}}
+  </div>
+  <div class="form-group">
+    <label for="address">Address</label>
+    {{input id="address" class="form-control" type="text" value=address required='required'}}
+  </div>
+  <div class="form-group">
+    <label for="zip_code">Zip Code</label>
+    {{input id="zip_code" class="form-control" type="text" value=zip_code required='required'}}
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

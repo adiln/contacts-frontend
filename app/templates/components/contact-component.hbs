@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-sm-6"><h5>Contacts</h5></div>
+  <div class="col-sm-6"><a href="#" class="{{if (eq isGroupAvailable false) 'disabled'}}" data-toggle="modal" data-target="#createContactModalId" {{action "openCreateContactModal"}}>Create Contact</a></div>
+</div>
+
+
+<div id="accordion">
+{{#each-in contacts as |group group_contacts|}}
+  <div class="card">
+    <div class="card-header" id="xyz">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target='#{{trim group}}' aria-expanded="true" aria-controls="collapseOnea">
+          {{group}}
+        </button>
+      </h5>
+    </div>
+    <div id='{{trim group}}' class="collapse show" aria-labelledby="abc" data-parent="#accordion">
+      <div class="card-body">
+        {{#each group_contacts as |contact|}}
+          <div class="col-sm-12 {{if (eq contact.name true) 'active'}}">
+            {{contact.contact_name}}
+            <a href="#" data-toggle="confirmation" onclick="return confirm('Are you sure you want to delete this item?');" {{action "deleteContact" contact.id }}>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              <span>Delete</span>
+            </a>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+{{/each-in}}
+</div>
+
+
+{{#if showContactModal}}
+  <div class="modal fade" id="createContactModalId" tabindex="-1" role="dialog" aria-labelledby="createContactModalIdTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <form>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Create Contact
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" {{action "closeModal"}}>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="name" class="col-form-label">Name</label>
+              {{input
+                id="name"
+                type="text"
+                placeholder="Enter contact name"
+                class="form-control"
+                value=name
+              }}
+            </div>
+            <div class="form-group">
+              <label for="email" class="col-form-label">Email:</label>
+              {{input
+                id="email"
+                type="text"
+                class="form-control"
+                value=email
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+              }}
+            </div>
+            <div>
+              <label for="group-text" class="col-form-label">Group:</label>
+              <select class="form-control" onchange={{action "setSelection" value="target.value"}} id="group_selection">
+                <option value="">Select a group</option>
+                {{#each groups as |group|}}
+                   <option value={{group.id}} >{{group.name}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" {{action "closeModal"}}>Close</button>
+              <button type="submit" data-dismiss="modal" class="btn btn-primary" {{action 'createContact'}}>Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{{/if}}
